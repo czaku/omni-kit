@@ -15,12 +15,11 @@ Modules (cool names):
 - blueprint: JSON schema validation
 - humanize: Human-like mistake injection
 - landscape: Platform detection and categorization
-- presets: Pre-configured AI settings
 
 Usage:
     from wickit import hideaway, knobs, alter-egos
     from wickit import synapse, pulse, blueprint
-    from wickit import humanize, landscape, presets
+    from wickit import humanize, landscape
 """
 
 from .hideaway import (
@@ -154,19 +153,6 @@ from .landscape import (
     PLATFORMS,
 )
 
-from .presets import (
-    AIPreset,
-    OLLAMA_DEFAULT,
-    OLLAMA_CODING,
-    CLAUDE_SONNET,
-    CLAUDE_OPUS,
-    GPT4_BALANCED,
-    GPT4_FAST,
-    OPENAI_DEFAULT,
-    get_preset,
-    apply_preset,
-    list_presets,
-)
 
 __version__ = "0.1.0"
 
@@ -280,16 +266,4 @@ __all__ = [
     "categorize_url",
     "get_all_categories",
     "PLATFORMS",
-    # presets
-    "AIPreset",
-    "OLLAMA_DEFAULT",
-    "OLLAMA_CODING",
-    "CLAUDE_SONNET",
-    "CLAUDE_OPUS",
-    "GPT4_BALANCED",
-    "GPT4_FAST",
-    "OPENAI_DEFAULT",
-    "get_preset",
-    "apply_preset",
-    "list_presets",
 ]
