@@ -15,11 +15,12 @@ Modules (cool names):
 - blueprint: JSON schema validation
 - humanize: Human-like mistake injection
 - landscape: Platform detection and categorization
+- vault: Database management
 
 Usage:
     from wickit import hideaway, knobs, alter-egos
     from wickit import synapse, pulse, blueprint
-    from wickit import humanize, landscape
+    from wickit import humanize, landscape, vault
 """
 
 from .hideaway import (
@@ -153,6 +154,21 @@ from .landscape import (
     PLATFORMS,
 )
 
+from .vault import (
+    VaultDatabase,
+    WickitSQLite,
+    DatabaseError,
+    get_database,
+    init_database,
+)
+
+from .shelf import (
+    SQLiteDatabase,
+    get_db_path,
+    export_database,
+    list_databases,
+)
+
 __version__ = "0.1.0"
 
 __all__ = [
@@ -265,4 +281,10 @@ __all__ = [
     "categorize_url",
     "get_all_categories",
     "PLATFORMS",
+    # vault
+    "VaultDatabase",
+    "WickitSQLite",
+    "DatabaseError",
+    "get_database",
+    "init_database",
 ]
