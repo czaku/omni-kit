@@ -15,6 +15,7 @@ src/wickit/landscape.py
 src/wickit/pulse.py
 src/wickit/shelf.py
 src/wickit/synapse.py
+src/wickit/vault.py
 src/wickit.egg-info/PKG-INFO
 src/wickit.egg-info/SOURCES.txt
 src/wickit.egg-info/dependency_links.txt

@@ -155,9 +155,9 @@ from .landscape import (
 )
 
 from .vault import (
-    VaultDatabase,
-    WickitSQLite,
+    SQLiteDatabase,
     DatabaseError,
+    Transaction,
     get_database,
     init_database,
 )
@@ -282,9 +282,9 @@ __all__ = [
     "get_all_categories",
     "PLATFORMS",
     # vault
-    "VaultDatabase",
-    "WickitSQLite",
+    "SQLiteDatabase",
     "DatabaseError",
+    "Transaction",
     "get_database",
     "init_database",
 ]
