@@ -1,11 +1,75 @@
-# wickit
+# wickit v0.3.0
 
-**Wicked utilities for Python.** A versatile library providing data directory management, configuration, profile management, cloud sync, spaced repetition learning, analytics, schema validation, and more.
+**Wicked utilities for cross-platform development.** A versatile library providing data directory management, configuration, profile management, cloud sync, service discovery, and more. Now supporting Python and JavaScript/TypeScript.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![npm](https://img.shields.io/badge/npm-%40wickit%2Fshuffle-red.svg)](https://www.npmjs.com/)
 
-## Modules
+## 🎉 v0.3.0 - Cross-Language Support
+
+Wickit now supports multiple languages with a unified API:
+
+- **Python** (`packages/python/`) - Full feature set
+- **JavaScript/TypeScript** (`packages/javascript/`) - Service discovery and more
+- **Shared Schemas** (`shared/schemas/`) - Cross-language compatibility
+
+## Quick Start
+
+### Python
+
+```bash
+pip install wickit
+```
+
+```python
+from wickit import hideaway, knobs, alter_egos, shuffle, flavour
+
+# Get data directory for your application
+data_dir = hideaway.get_data_dir("myapp")
+
+# Load configuration
+config = knobs.get_config("myapp")
+
+# Auto-detect environment
+env = flavour.get_environment()
+print(f"Running in: {env.name}")  # production, development, staging, local, mock
+
+# Register service with dynamic port discovery
+from wickit.shuffle import ServiceRegistry
+
+registry = ServiceRegistry(
+    service_id="myapp-api",
+    port_range=(8000, 8009),
+    project_context=env.to_shuffle_context()
+)
+
+service_info = registry.start()
+print(f"Service running on port {service_info.port}")
+```
+
+### JavaScript/TypeScript
+
+```bash
+npm install @wickit/shuffle
+```
+
+```typescript
+import { discoverService } from '@wickit/shuffle';
+
+// Discover backend service
+const backend = await discoverService({
+  serviceId: 'myapp-api',
+  portRange: [8000, 8009],
+  timeout: 5000
+});
+
+console.log(`Backend at: ${backend.url}`);
+```
+
+## 📦 Packages
+
+### Python Package (`packages/python/`)
 
 | Module | Description |
 |--------|-------------|
@@ -20,6 +84,139 @@
 | **blueprint** | JSON schema validation |
 | **humanize** | Human-like mistake injection |
 | **landscape** | Platform detection and categorization |
+| **shuffle** | Dynamic service discovery and port management |
+| **flavour** | Environment management (prod/dev/stage/local/mock) |
+
+### JavaScript Package (`packages/javascript/`)
+
+| Module | Description |
+|--------|-------------|
+| **shuffle** | Service discovery for frontend apps |
+
+### Shared Resources (`shared/`)
+
+| Resource | Description |
+|----------|-------------|
+| **schemas/** | JSON schemas for cross-language compatibility |
+| **protocols/** | Communication protocols |
+
+## 🔧 Environment Management (New in v0.3.0)
+
+Wickit now includes `flavour` module for automatic environment detection:
+
+```python
+from wickit.flavour import get_environment, is_production
+
+# Auto-detects from: WICKIT_ENV, .env file, git branch, hostname
+env = get_environment()
+
+if env.is_production:
+    # Enable strict logging, error reporting
+    pass
+elif env.is_development:
+    # Enable debug mode
+    pass
+
+# Environment-specific config
+config = env.get_config("myapp")
+# Loads: config.json + config.{env}.json
+```
+
+**Supported Environments:**
+- `production` - Production deployment
+- `staging` - Staging/QA environment
+- `development` - Development environment
+- `local` - Local development
+- `mock` - Testing/Mock environment
+- Custom environments via `register_environment()`
+
+## 🚀 Service Discovery (New in v0.3.0)
+
+Dynamic port assignment and service discovery:
+
+```python
+from wickit.shuffle import ServiceRegistry, ServiceDiscovery
+
+# Backend: Register service
+registry = ServiceRegistry(
+    service_id="myapp-api",
+    port_range=(8000, 8009),
+    project_context={"project": "myapp", "version": "1.0.0"}
+)
+
+service_info = registry.start()
+# Automatically finds available port in range
+
+# Frontend: Discover service
+from wickit.shuffle import ServiceDiscovery
+
+discovery = ServiceDiscovery(port_range=(8000, 8009))
+service_info = discovery.discover_service(
+    expected_service_id="myapp-api",
+    project_context={"project": "myapp"}
+)
+```
+
+## 📁 Project Structure
+
+```
+wickit/
+├── packages/
+│   ├── python/              # Python implementation
+│   │   ├── src/wickit/      # Source modules
+│   │   └── tests/           # Python tests
+│   └── javascript/          # JavaScript/TypeScript implementation
+│       ├── src/             # TypeScript source
+│       └── tests/           # JavaScript tests
+├── shared/
+│   └── schemas/             # Cross-language JSON schemas
+├── examples/                # Usage examples
+├── docs/                    # Documentation
+└── README.md               # This file
+```
+
+## 🧪 Testing
+
+### Python
+
+```bash
+cd packages/python
+pytest tests/ -v
+```
+
+### JavaScript
+
+```bash
+cd packages/javascript
+npm test
+```
+
+## 📚 Documentation
+
+- [Python API Docs](docs/python/)
+- [JavaScript API Docs](docs/javascript/)
+- [Service Discovery Guide](docs/SERVICE_DISCOVERY.md)
+- [Environment Management](docs/ENVIRONMENTS.md)
+- [Migration Guide v0.2 to v0.3](docs/MIGRATION_v0.3.md)
+
+## 🤝 Integration with Other Wickit Products
+
+Wickit is designed to work seamlessly across the ecosystem:
+
+- **DJLab** - Uses wickit.shuffle for port management
+- **JobForge** - Uses wickit.shuffle and wickit.flavour
+- **RalfiePretzel** - Uses wickit.shuffle for service discovery
+
+## 📄 License
+
+MIT License - see LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+Wickit is used by:
+- DJLab - AI music production
+- JobForge - AI job application assistant
+- RalfiePretzel - AI software development orchestration
 
 ## Installation
 
