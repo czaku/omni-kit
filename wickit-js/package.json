@@ -1,0 +1,27 @@
+{
+  "name": "@wickit/shuffle",
+  "version": "0.1.0",
+  "description": "wickit shuffle - Frontend service discovery for port range management",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "wickit",
+    "service-discovery",
+    "port-shuffle",
+    "tauri",
+    "desktop-app"
+  ],
+  "author": "DJLab",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

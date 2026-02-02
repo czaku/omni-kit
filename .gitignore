@@ -40,3 +40,6 @@ Thumbs.db
 # Wickit specific
 *.db
 *.sqlite
+
+# Cache files that shouldn't be committed
+src/wickit/__pycache__/
