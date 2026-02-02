@@ -600,3 +600,49 @@ Initial release of wickit - wicked utilities for Python.
 ## License
 
 MIT License - see LICENSE file for details.
+| **shuffle** | Dynamic service discovery and connection management |
+
+
+## shuffle - Dynamic Service Discovery & Connection Management
+
+The `shuffle` module provides dynamic service discovery and connection management for multi-tool architectures. It's specifically designed to solve port conflicts and enable secure communication between services, with special emphasis on Tauri desktop applications.
+
+### Features
+
+- **Dynamic Port Assignment**: Automatically discover available ports to avoid conflicts
+- **Service Identity Verification**: Verify services are legitimate before connecting
+- **Health Monitoring**: Monitor service health and handle recovery from restarts
+- **Tauri Integration**: Seamless integration with Tauri desktop applications
+- **mDNS Discovery**: Optional mDNS service registration for local discovery
+- **Secure Connections**: Verification tokens to prevent unauthorized connections
+
+### Usage
+
+```python
+from wickit.shuffle import ServiceRegistry, ServiceDiscovery
+
+# Register a service with automatic port assignment
+registry = ServiceRegistry(
+    service_id="my-api",
+    port_range=(7770, 7779),
+    project_context={"project": "my-app", "version": "1.0.0"}
+)
+
+service_info = registry.start()
+
+# Discover services in your application
+discovery = ServiceDiscovery(port_range=(7770, 7779))
+service_info = discovery.discover_service(
+    expected_service_id="my-api",
+    project_context={"project": "my-app"}
+)
+
+if service_info:
+    print(f"Found service on port {service_info.port}")
+```
+
+### Documentation
+
+For complete integration guide, see [docs/SERVICE_DISCOVERY_TAURI_INTEGRATION.md](docs/SERVICE_DISCOVERY_TAURI_INTEGRATION.md)
+
+
